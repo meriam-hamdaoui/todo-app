@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { MdDoneOutline, MdOutlineDelete } from "react-icons/md";
 import { connect } from "react-redux";
 import { removeTodos, editTodos, completeTodos } from "../reduxFiles/reducer";
 
@@ -48,9 +50,25 @@ const TodoCard = ({ todoItem, removeTodo, editTodo, completeTodo }) => {
         onKeyPress={(e) => edit(todoItem.id, inputRef.current.value, e)}
       />
       <div className="btns">
-        <button onClick={() => changeFocus()}>Edit</button>
-        <button onClick={() => completeTodo(todoItem.id)}>Complete</button>
-        <button onClick={() => removeTodo(todoItem.id)}>Delete</button>
+        <button style={{ color: "blue" }} onClick={() => changeFocus()}>
+          <AiOutlineEdit />
+        </button>
+        {/* the complete button will be displayed only if it's not done yet */}
+        {todoItem.completed === false && (
+          <button
+            style={{ color: "green" }}
+            onClick={() => completeTodo(todoItem.id)}
+          >
+            <MdDoneOutline />
+          </button>
+        )}
+
+        <button
+          style={{ color: "red" }}
+          onClick={() => removeTodo(todoItem.id)}
+        >
+          <MdOutlineDelete />
+        </button>
       </div>
       {todoItem.completed && <span className="completed">done</span>}
     </li>

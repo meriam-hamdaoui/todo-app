@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodos } from "../reduxFiles/reducer";
+import { GoPlus } from "react-icons/go";
 
 //the mapStateToProps returns a state & pass it to the component
 const mapStateToProps = (state) => {
@@ -39,25 +40,31 @@ const Todos = ({ addTodo }) => {
   };
 
   //handle add btn click
-  const handleClick = () => {
-    addTodo(objTodo);
-    setTodo("");
+  const handleAddClick = () => {
+    if (todo === "") {
+      alert("type something first");
+    } else {
+      addTodo(objTodo);
+      setTodo("");
+    }
   };
 
   return (
-    <>
-      <div className="addTodos">
-        <input
-          onChange={(e) => handleChange(e)}
-          className="todo-input"
-          type="text"
-          value={todo}
-        />
-        <button onClick={() => handleClick()} type="button">
-          Add
-        </button>
-      </div>
-    </>
+    <div className="addTodos">
+      <input
+        onChange={(e) => handleChange(e)}
+        className="todo-input"
+        type="text"
+        value={todo}
+      />
+      <button
+        className="add-btn"
+        onClick={() => handleAddClick()}
+        type="button"
+      >
+        <GoPlus />
+      </button>
+    </div>
   );
 };
 
