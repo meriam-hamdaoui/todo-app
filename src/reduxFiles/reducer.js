@@ -25,14 +25,14 @@ const todoReducers = createSlice({
     },
     //edit todos
     editTodos: (state, action) => {
-      return state.map((item) => {
-        if (item.id === action.payload.id) {
+      return state.map((todo) => {
+        if (todo.id === action.payload.id) {
           return {
-            ...item,
+            ...todo,
             item: action.payload.item,
           };
         }
-        return item;
+        return todo;
       });
     },
     //the complete action
