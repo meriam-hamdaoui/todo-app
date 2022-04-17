@@ -1,28 +1,9 @@
 import React, { useRef } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDoneOutline, MdOutlineDelete } from "react-icons/md";
-import { connect } from "react-redux";
-import { removeTodos, editTodos, completeTodos } from "../reduxFiles/reducer";
-
-//the mapStateToProps returns a state & pass it to the component
-const mapStateToProps = (state) => {
-  return {
-    todos: state,
-  };
-};
-
-//the mapDispatchToProps returns an action & pass it to the component
-//and allow the component to sent messages to the store for updates
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeTodo: (id) => dispatch(removeTodos(id)),
-    editTodo: (obj) => dispatch(editTodos(obj)),
-    completeTodo: (id) => dispatch(completeTodos(id)),
-  };
-};
 
 const TodoCard = ({ todoItem, removeTodo, editTodo, completeTodo }) => {
-  //useRefn allows us to persist values between renders. for the edit function
+  //useRef allows us to persist values between renders. for the edit function
   const inputRef = useRef(true);
 
   //make our textarea editable on click edit button
@@ -36,7 +17,7 @@ const TodoCard = ({ todoItem, removeTodo, editTodo, completeTodo }) => {
     if (e.which === 13) {
       //equivalent to if(e.key === "Enter")
       //which 13 is a key code for Enter
-      editTodo({ id, todoItem: value });
+      editTodo({ id, item: value });
       inputRef.current.disabled = true;
     }
   };
@@ -75,4 +56,4 @@ const TodoCard = ({ todoItem, removeTodo, editTodo, completeTodo }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoCard);
+export default TodoCard;

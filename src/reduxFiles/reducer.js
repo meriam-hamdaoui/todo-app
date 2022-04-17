@@ -21,7 +21,7 @@ const todoReducers = createSlice({
     },
     //remove todos
     removeTodos: (state, action) => {
-      return state.filter((todo) => todo.id !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
     },
     //edit todos
     editTodos: (state, action) => {
@@ -37,14 +37,14 @@ const todoReducers = createSlice({
     },
     //the complete action
     completeTodos: (state, action) => {
-      return state.map((item) => {
-        if (item.id === action.payload) {
+      return state.map((todo) => {
+        if (todo.id === action.payload) {
           return {
-            ...item,
+            ...todo,
             completed: true,
           };
         }
-        return item;
+        return todo;
       });
     },
   },
